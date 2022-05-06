@@ -1,12 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"math/rand"
-	"os"
-	"strconv"
-	"strings"
 	"time"
 )
 
@@ -14,21 +10,14 @@ func main() {
 	maxNum := 100
 	rand.Seed(time.Now().UnixNano())
 	secretNumber := rand.Intn(maxNum)
-	// fmt.Println("The secret number is ", secretNumber)
-
 	fmt.Println("Please input your guess")
-	reader := bufio.NewReader(os.Stdin)
+	var guess int
+	var err error
 	for {
-		input, err := reader.ReadString('\n')
-		if err != nil {
-			fmt.Println("An error occured while reading input. Please try again", err)
-			continue
-		}
-		input = strings.TrimSuffix(input, "\r\n")
-
-		guess, err := strconv.Atoi(input)
+		_, err = fmt.Scanf("%d\n", &guess)
 		if err != nil {
 			fmt.Println("Invalid input. Please enter an integer value")
+			fmt.Println("err=" + err.Error())
 			continue
 		}
 		fmt.Println("You guess is", guess)
